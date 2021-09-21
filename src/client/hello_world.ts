@@ -216,10 +216,10 @@ export async function checkProgram(): Promise<void> {
  * Say hello
  */
 export async function sayHello(cs: string): Promise<void> {
-  console.log('Sending request to smart contract', greetedPubkey.toBase58());
+  console.log('Sending request to program', greetedPubkey.toBase58());
   let dataAccount = new GetData();
   dataAccount.client_seed = cs;
-  dataAccount.vec_len = 10;
+  dataAccount.vec_len = 503;
 
   console.log('Client Seed:', dataAccount.client_seed, 'Vector length:', dataAccount.vec_len);
 
