@@ -2,9 +2,9 @@ use solana_program::{
     msg,
 };
 
-use sha2::Sha512;
+use sha2::Sha256;
 use hmac::{Hmac, Mac, NewMac};
-type HmacSHA512 = Hmac<Sha512>;
+type HmacSHA256 = Hmac<Sha256>;
 
 //utilities
 pub fn to_hex_string(bytes: &Vec<u8>) -> String {
@@ -20,8 +20,8 @@ pub fn hash_to_number(slice : &str) -> i64{
 }
 
 //main fns
-pub fn convert_to_hmacsha512(server_seed : String, input: String, nonce: u8) -> String{
-    let mut mac = HmacSHA512::new_from_slice(server_seed.as_bytes()).expect("some error occured");
+pub fn convert_to_HmacSHA256(server_seed : String, input: String, nonce: u8) -> String{
+    let mut mac = HmacSHA256::new_from_slice(server_seed.as_bytes()).expect("some error occured");
     mac.update(&format!("{} - {}", input.trim().to_string(), nonce).into_bytes());
     let result = mac.finalize();
     let byte_arr = result.into_bytes();
@@ -62,7 +62,7 @@ pub fn generate_random_number(client_seed: &str, nonce: u8, vec_len: u32) -> u32
     // let mut main_vec = vec!["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
     // let mut bundle_vec = Vec::new();
      
-    let hmachash: String = convert_to_hmacsha512(server_seed.to_string(), client_seed.to_string(), nonce);
+    let hmachash: String = convert_to_HmacSHA256(server_seed.to_string(), client_seed.to_string(), nonce);
     msg!("hmachash: {}", hmachash);
     let rnd = validate_hex_characters(&hmachash).unwrap()%(10000)/100;
 
