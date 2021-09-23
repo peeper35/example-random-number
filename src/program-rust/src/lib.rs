@@ -6,6 +6,7 @@ use solana_program::{
     msg,
     program_error::ProgramError,
     pubkey::Pubkey,
+    log::sol_log_compute_units
 };
 
 mod helper;
@@ -61,13 +62,15 @@ pub fn process_instruction(
     // save_data.serialize(&mut &mut set_account.data.borrow_mut()[..])?;
 
     save_data.random_number = helper::generate_random_number(
-        &get_data.client_seed, 
-        save_data.nonce as u8, 
-        get_data.vec_len
+        &get_data.client_seed,
+        save_data.nonce as u8,
+        get_data.vec_len,
     );
 
     save_data.serialize(&mut &mut set_account.data.borrow_mut()[..])?;
-    
+
+    sol_log_compute_units();
+
     msg!("Nonce: {}", save_data.nonce);
     msg!("Random Number: {}", save_data.random_number);
 
