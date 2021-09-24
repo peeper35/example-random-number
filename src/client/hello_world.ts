@@ -48,13 +48,13 @@ const PROGRAM_PATH = path.resolve(__dirname, '../../dist/program');
  *   - `npm run build:program-c`
  *   - `npm run build:program-rust`
  */
-const PROGRAM_SO_PATH = path.join(PROGRAM_PATH, 'helloworld.so');
+const PROGRAM_SO_PATH = path.join(PROGRAM_PATH, 'random_number.so');
 
 /**
  * Path to the keypair of the deployed program.
  * This file is created when running `solana program deploy dist/program/helloworld.so`
  */
-const PROGRAM_KEYPAIR_PATH = path.join(PROGRAM_PATH, 'helloworld-keypair.json');
+const PROGRAM_KEYPAIR_PATH = path.join(PROGRAM_PATH, 'random_number-keypair.json');
 
 /**
  * The state of a greeting account managed by the hello world program
@@ -219,7 +219,7 @@ export async function sayHello(cs: string): Promise<void> {
   console.log('Sending request to program', greetedPubkey.toBase58());
   let dataAccount = new GetData();
   dataAccount.client_seed = cs;
-  dataAccount.vec_len = 503;
+  dataAccount.vec_len = 23;
 
   console.log('Client Seed:', dataAccount.client_seed, 'Vector length:', dataAccount.vec_len);
 

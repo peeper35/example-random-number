@@ -1863,6 +1863,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "random-number-generator"
+version = "0.0.1"
+dependencies = [
+ "borsh",
+ "borsh-derive",
+ "hmac 0.11.0",
+ "sha2",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+]
+
+[[package]]
 name = "rayon"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2251,19 +2264,6 @@ dependencies = [
  "tokio 1.7.0",
  "tokio-serde",
  "tokio-stream",
-]
-
-[[package]]
-name = "solana-bpf-helloworld"
-version = "0.0.1"
-dependencies = [
- "borsh",
- "borsh-derive",
- "hmac 0.11.0",
- "sha2",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
 ]
 
 [[package]]
